@@ -7,3 +7,11 @@
   justify-content: space-evenly;
   flex-wrap: wrap;
 }
+
+.Pokedex-winner {
+  color: limegreen;
+}
+
+.Pokedex-loser {
+  color: rgb(228, 65, 65);
+}
