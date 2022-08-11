@@ -3,13 +3,9 @@ import { randomColor } from './helper'
 import './Box.css'
 
 export default class Box extends Component {
-  static defaultProps = {
-    allColors: ['purple', 'blue', 'limegreen', 'lightblue', 'burlywood']
-  };
-  
   constructor(props) {
     super(props);
-    this.state = {color: randomColor(this.props.allColors)};
+    this.state = {color: randomColor(this.props.colors)};
     this.handleClick = this.handleClick.bind(this);
   }
 
@@ -17,7 +13,7 @@ export default class Box extends Component {
     let newColor;
 
     do {
-      newColor = randomColor(this.props.allColors) 
+      newColor = randomColor(this.props.colors) 
     } while (newColor === this.state.color) {
       this.setState({color: newColor})
     }

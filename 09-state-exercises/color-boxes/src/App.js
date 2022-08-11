@@ -1,9 +1,9 @@
 import './App.css';
-import Box from './Box'
+import BoxContainer from './BoxContainer'
 
 function App() {
   return (
-    <Box />
+    <BoxContainer />
   );
 }
 
