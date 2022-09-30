@@ -78,7 +78,7 @@ class Hangman extends Component {
         <img src={this.props.images[this.state.nWrong]} alt={altTetx} />
         <p className='Hangman-word'>{this.state.nWrong}/{this.props.maxWrong}</p>
         <button onClick={this.resetGame} style={{width: 'auto'}}>Reset Game</button>
-        <p>{this.winGame()}</p>
+        {this.guessedWord().join('') === this.state.answer && <p>You win!</p>}
         <p className='Hangman-word'>{endGameLoss ? this.state.answer : this.guessedWord()}</p>
         <p className='Hangman-btns'>{endGameLoss ? 'You lose!' : this.generateButtons()}</p>
       </div>
