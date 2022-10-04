@@ -9,7 +9,10 @@ export default class Box extends Component {
     }
 
     return (
-      <div style={style}></div>
+      <div>
+        <div style={style}></div>
+        <button onClick={this.props.removeBox}>X</button>
+      </div>
     )
   }
 }
