@@ -23,9 +23,26 @@ export default class ToDoList extends Component {
     this.setState({ todos: this.state.todos.filter((todo) => todo.id !== item) });
   };
 
+  update = (id, updatedTask) => {
+    const updatedTodos = this.state.todos.map(todo => {
+      console.log(todo.id, id)
+      if (todo.id === id) return { ...todo, task: updatedTask }
+      console.log(todo, updatedTask)
+      return todo;
+    });
+    console.log(updatedTodos)
+    this.setState({ todos: updatedTodos })
+  }
+
   render() {
     const list = this.state.todos.map((todo) => {
-      return <Todo key={todo.id} id={todo.id} todo={todo.item} removeItem={() => this.remove(todo.id)} />
+      return <Todo 
+        key={todo.id} 
+        id={todo.id} 
+        todo={todo.item} 
+        removeItem={() => this.remove(todo.id)} 
+        updateItem={this.update} 
+      />
     });
 
     return (
