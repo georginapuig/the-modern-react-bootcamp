@@ -4,7 +4,7 @@ export default class Todo extends Component {
   constructor(props) {
     super(props);
     
-    this.state = { isEditing: false, task: this.props.todo }
+    this.state = { isEditing: false, task: this.props.task }
   }
   
   edit = () => {
@@ -13,12 +13,13 @@ export default class Todo extends Component {
 
   handleUpdate = (evt) => {
     evt.preventDefault();
+    // take new task data and pass up to parent
     this.props.updateItem(this.props.id, this.state.task)
     this.setState({ isEditing: false });
   }
 
   handleChange = (evt) => {
-    this.setState({ task: evt.target.value });
+    this.setState({ [evt.target.name]: evt.target.value });
   }
 
   render() {
@@ -36,7 +37,7 @@ export default class Todo extends Component {
     } else {
       result = (
         <div>
-          <li>{this.props.todo}</li>
+          <li>{this.state.task}</li>
       
           <div>
             <button onClick={this.edit}>edit</button>

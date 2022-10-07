@@ -26,7 +26,9 @@ export default class ToDoList extends Component {
   update = (id, updatedTask) => {
     const updatedTodos = this.state.todos.map(todo => {
       console.log(todo.id, id)
-      if (todo.id === id) return { ...todo, task: updatedTask }
+      if (todo.id === id) {
+        return { ...todo, task: updatedTask }
+      }
       console.log(todo, updatedTask)
       return todo;
     });
@@ -39,7 +41,7 @@ export default class ToDoList extends Component {
       return <Todo 
         key={todo.id} 
         id={todo.id} 
-        todo={todo.item} 
+        task={todo.item} 
         removeItem={() => this.remove(todo.id)} 
         updateItem={this.update} 
       />
