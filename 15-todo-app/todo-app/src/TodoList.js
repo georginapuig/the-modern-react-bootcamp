@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import NewTodoForm from './NewTodoForm';
 import Todo from './Todo';
+import './TodoList.css';
 
 export default class ToDoList extends Component {
   constructor(props) {
@@ -42,7 +43,7 @@ export default class ToDoList extends Component {
       if (todo.id === id) return { ...todo, completed: !todo.completed }
       return todo;
     });
-    this.setState({ todos: toggleCompletion })
+    this.setState({ todos: toggleCompletion });
   }
 
   render() {
@@ -59,8 +60,8 @@ export default class ToDoList extends Component {
     });
 
     return (
-      <div>
-        <h1>Todo List</h1>
+      <div className='TodoList'>
+        <h1>React Todo List</h1>
         <NewTodoForm addItem={this.add} />
         <ul>
           {list}

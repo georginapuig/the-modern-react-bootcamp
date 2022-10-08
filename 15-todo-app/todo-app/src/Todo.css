@@ -1,7 +1,3 @@
-.completed {
-  color: blue;
-}
-
 .Todo {
   display: flex;
   margin: 0 -3rem 4px;
@@ -18,16 +14,16 @@
   position: relative;
   transition: opacity 0.4s linear;
 }
-.Todo.completed {
+.Todo-task.completed {
   transition: opacity 300ms ease-in-out;
   transition-delay: 200ms;
   opacity: 0.5;
 }
 
-.Todo.completed .Todo-task {
-  /* opacity: 0.6; */
+.Todo-task.completed {
+  opacity: 0.6;
 }
-.Todo.completed .Todo-task:before {
+.Todo-task.completed:before {
   content: "";
   position: absolute;
   top: 50%;
