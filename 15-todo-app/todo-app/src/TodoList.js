@@ -36,6 +36,15 @@ export default class ToDoList extends Component {
     this.setState({ todos: updatedTodos })
   }
 
+  toggle = (id) => {
+    const toggleCompletion = this.state.todos.map(todo => {
+      console.log(todo, todo.completed)
+      if (todo.id === id) return { ...todo, completed: !todo.completed }
+      return todo;
+    });
+    this.setState({ todos: toggleCompletion })
+  }
+
   render() {
     const list = this.state.todos.map((todo) => {
       return <Todo 
@@ -44,6 +53,8 @@ export default class ToDoList extends Component {
         task={todo.item} 
         removeItem={() => this.remove(todo.id)} 
         updateItem={this.update} 
+        completed={todo.completed}
+        toggle={this.toggle}
       />
     });
 

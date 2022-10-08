@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './Todo.css'
 
 export default class Todo extends Component {
   constructor(props) {
@@ -22,6 +23,10 @@ export default class Todo extends Component {
     this.setState({ [evt.target.name]: evt.target.value });
   }
 
+  handleToggle = (evt) => {
+    this.props.toggle(this.props.id)
+  }
+
   render() {
     let result; 
 
@@ -37,7 +42,7 @@ export default class Todo extends Component {
     } else {
       result = (
         <div>
-          <li>{this.state.task}</li>
+          <li className={this.props.completed ? 'completed' : ''} onClick={this.handleToggle}>{this.state.task}</li>
       
           <div>
             <button onClick={this.edit}>edit</button>

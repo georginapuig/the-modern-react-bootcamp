@@ -15,7 +15,7 @@ export default class NewTodoForm extends Component {
   handleSubmit = (evt) => {
     evt.preventDefault();
     console.log(this.state.item);
-    this.props.addItem({...this.state, id: uuidv4()});
+    this.props.addItem({...this.state, id: uuidv4(), completed: false });
     this.setState({ item: '' });
   }
 
