@@ -60,7 +60,6 @@ class SumDistro extends Rule {
 
 class FullHouse extends Rule {
   evalRoll = dice => {
-    console.log(this.freq(dice))
     const freqs = this.freq(dice);
     return (freqs.includes(3) && freqs.includes(2)) ? this.score : 0
   };
@@ -68,9 +67,15 @@ class FullHouse extends Rule {
 
 /** Check for small straights. */
 
-class SmallStraight {
+class SmallStraight extends Rule {
   evalRoll = dice => {
+    const d = new Set(dice);
     
+    if (d.has(2) && d.has(3) && d.has(4) && (d.has(1) || d.has(5)))
+      return this.score
+
+    if (d.has(3) && d.has(4) && d.has(5) && (d.has(2) || d.has(6)))
+      return this.score
   };
 }
 
@@ -79,7 +84,6 @@ class SmallStraight {
 class LargeStraight extends Rule {
   evalRoll = dice => {
     const d = new Set(dice);
-    console.log(dice)
     // large straight must be 5 different dice & only one can be a 1 or a 6
     return d.size === 5 && (!d.has(1) || !d.has(6)) ? this.score : 0;
   };
@@ -111,7 +115,7 @@ const fullHouse = new FullHouse({ score: 25 });
 console.log(fullHouse)
 
 // small/large straights score as 30/40
-const smallStraight = "TODO";
+const smallStraight = new SmallStraight({ score: 30 });
 
 const largeStraight = new LargeStraight({ score: 40 });
 // yahtzee scores as 50
