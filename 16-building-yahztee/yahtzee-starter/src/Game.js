@@ -41,7 +41,7 @@ class Game extends Component {
         st.locked[i] ? d : Math.ceil(Math.random() * 6)
       ),
       locked: st.rollsLeft > 1 ? st.locked : Array(NUM_DICE).fill(true),
-      rollsLeft: st.rollsLeft - 1
+      rollsLeft: st.rollsLeft > 0 ? st.rollsLeft - 1 : st.rollsLeft
     }));
   }
 
