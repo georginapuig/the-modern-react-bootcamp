@@ -20,7 +20,6 @@ class JokeList extends Component {
 	}
 
 	async componentDidMount() {
-		console.log(this.state.jokes);
 		if (this.state.jokes.length === 0) this.getJokes();
 	}
 
@@ -33,7 +32,13 @@ class JokeList extends Component {
 			});
 			jokes.push({ id: uuidv4(), joke: res.data.joke, votes: 0 });
 		}
-		this.setState({ jokes: jokes });
+		this.setState(
+			st => ({
+				jokes: [...st.jokes, ...jokes],
+			}),
+			() =>
+				window.localStorage.setItem('jokes', JSON.stringify(this.state.jokes))
+		);
 		window.localStorage.setItem('jokes', JSON.stringify(jokes));
 	}
 
@@ -48,6 +53,10 @@ class JokeList extends Component {
 				window.localStorage.setItem('jokes', JSON.stringify(this.state.jokes))
 		);
 	}
+
+	handleClick = () => {
+		this.getJokes();
+	};
 
 	render() {
 		return (
