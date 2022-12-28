@@ -4,7 +4,7 @@ import axios from 'axios';
 import './JokeList.css';
 import Joke from './Joke';
 
-const url = 'https://icanhazdadjoke.com';
+const url = 'https://icanhazdadjokes.com';
 
 class JokeList extends Component {
 	static defaultProps = {
@@ -15,33 +15,49 @@ class JokeList extends Component {
 		super(props);
 
 		this.state = {
-			jokes: JSON.parse(window.localStorage.getItem('jokes')) || '[]',
+			jokes: JSON.parse(window.localStorage.getItem('jokes') || '[]'),
 			loading: false,
 		};
+		console.log('constructor', this.state.jokes);
+		this.seenJokes = new Set(this.state.jokes.map(j => j.joke));
+		console.log(this.seenJokes);
 	}
 
 	async componentDidMount() {
 		if (this.state.jokes.length === 0) this.getJokes();
+		console.log('componentDidMount', this.state.jokes);
 	}
 
 	async getJokes() {
-		let jokes = [];
+		try {
+			let jokes = [];
 
-		while (jokes.length < this.props.numJokesToGet) {
-			let res = await axios.get(url, {
-				headers: { Accept: 'application/json' },
-			});
-			jokes.push({ id: uuidv4(), joke: res.data.joke, votes: 0 });
+			while (jokes.length < this.props.numJokesToGet) {
+				let res = await axios.get(url, {
+					headers: { Accept: 'application/json' },
+				});
+				let newJoke = res.data.joke;
+				console.log(this.seenJokes.has(newJoke));
+				if (!this.seenJokes.has(newJoke)) {
+					jokes.push({ id: uuidv4(), joke: newJoke, votes: 0 });
+				} else {
+					console.log('found a duplicate');
+					console.log(newJoke);
+				}
+			}
+			this.setState(
+				st => ({
+					loading: false,
+					jokes: [...st.jokes, ...jokes],
+				}),
+				() =>
+					window.localStorage.setItem('jokes', JSON.stringify(this.state.jokes))
+			);
+			window.localStorage.setItem('jokes', JSON.stringify(jokes));
+		} catch (error) {
+			alert(error);
+			this.setState({ loading: false });
 		}
-		this.setState(
-			st => ({
-				loading: false,
-				jokes: [...st.jokes, ...jokes],
-			}),
-			() =>
-				window.localStorage.setItem('jokes', JSON.stringify(this.state.jokes))
-		);
-		window.localStorage.setItem('jokes', JSON.stringify(jokes));
 	}
 
 	handleVote(id, delta) {
@@ -61,6 +77,8 @@ class JokeList extends Component {
 	};
 
 	render() {
+		console.log('render', this.state.jokes);
+
 		if (this.state.loading) {
 			return (
 				<div className='JokeList-spinner'>
@@ -69,7 +87,7 @@ class JokeList extends Component {
 				</div>
 			);
 		}
-		
+
 		return (
 			<div className='JokeList'>
 				<div className='JokeList-sidebar'>
