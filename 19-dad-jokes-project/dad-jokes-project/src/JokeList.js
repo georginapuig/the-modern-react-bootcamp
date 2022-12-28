@@ -4,7 +4,7 @@ import axios from 'axios';
 import './JokeList.css';
 import Joke from './Joke';
 
-const url = 'https://icanhazdadjokes.com';
+const url = 'https://icanhazdadjoke.com';
 
 class JokeList extends Component {
 	static defaultProps = {
@@ -88,6 +88,8 @@ class JokeList extends Component {
 			);
 		}
 
+		let jokes = this.state.jokes.sort((a, b) => b.votes - a.votes);
+
 		return (
 			<div className='JokeList'>
 				<div className='JokeList-sidebar'>
@@ -104,7 +106,7 @@ class JokeList extends Component {
 				</div>
 
 				<div className='JokeList-jokes'>
-					{this.state.jokes.map(j => {
+					{jokes.map(j => {
 						return (
 							<Joke
 								key={j.id}
