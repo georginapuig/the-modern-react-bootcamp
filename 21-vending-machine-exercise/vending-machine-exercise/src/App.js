@@ -12,13 +12,25 @@ function App() {
 			<nav>
 				<ul>
 					<li>
-						<NavLink to='/soda'>Soda</NavLink>
+						<NavLink
+							to='/soda'
+							className={navData => (navData.isActive ? 'nav' : '')}>
+							Soda
+						</NavLink>
 					</li>
 					<li>
-						<NavLink to='/sardines'>Sardines</NavLink>
+						<NavLink
+							to='/sardines'
+							className={navData => (navData.isActive ? 'nav' : '')}>
+							Sardines
+						</NavLink>
 					</li>
 					<li>
-						<NavLink to='/chips'>Chips</NavLink>
+						<NavLink
+							to='/chips'
+							className={navData => (navData.isActive ? 'nav' : '')}>
+							Chips
+						</NavLink>
 					</li>
 				</ul>
 			</nav>
