@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Routes from './Routes';
+import RouterRoutes from './RouterRoutes';
 import Navbar from './Navbar';
 import whiskey from './images/whiskey.jpg';
 import tubby from './images/tubby.jpg';
@@ -46,7 +46,7 @@ class App extends Component {
 			<div>
 				<Navbar dogs={this.props.dogs} />
 				<div className='container'>
-					<Routes dogs={this.props.dogs} />
+					<RouterRoutes dogs={this.props.dogs} />
 				</div>
 			</div>
 		);
