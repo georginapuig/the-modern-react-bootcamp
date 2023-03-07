@@ -19,7 +19,10 @@ export default function Todo() {
   };
   const removeTodo = (todoId) => {
     // filter out removed todo
+    const updatedTodos = todos.filter((todo) => todo.id !== todoId);
     // call setTodos with new todos array
+    setTodos(updatedTodos);
+    console.log('remove');
   };
 
   return (
@@ -44,7 +47,7 @@ export default function Todo() {
       >
         <Grid item xs={11} md={8} lg={4}>
           <TodoForm addTodo={addTodo} />
-          <TodoList todos={todos} />
+          <TodoList todos={todos} remove={removeTodo} />
         </Grid>
       </Grid>
     </Paper>

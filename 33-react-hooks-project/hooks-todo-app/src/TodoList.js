@@ -12,7 +12,13 @@ export default function TodoList(props) {
           // To add a key to a fragment, we have to use the long-hand version
           // rather than <> </>, we have to use <React.Fragment>
           <>
-            <Todo task={todo.task} key={todo.id} completed={todo.completed} />
+            <Todo
+              id={todo.id}
+              key={todo.id}
+              task={todo.task}
+              completed={todo.completed}
+              remove={props.remove}
+            />
             <Divider />
           </>
         ))}

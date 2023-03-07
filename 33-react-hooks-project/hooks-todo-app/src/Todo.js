@@ -9,7 +9,7 @@ import {
   ListItemSecondaryAction,
 } from '@mui/material';
 
-export default function Todo({ task, completed }) {
+export default function Todo({ task, completed, remove, id }) {
   return (
     <ListItem>
       <Checkbox disableRipple tabIndex={-1} checked={completed} />
@@ -22,7 +22,7 @@ export default function Todo({ task, completed }) {
         <IconButton aria-label='Edit'>
           <EditIcon></EditIcon>
         </IconButton>
-        <IconButton aria-label='Delete'>
+        <IconButton aria-label='Delete' onClick={() => remove(id)}>
           <DeleteIcon></DeleteIcon>
         </IconButton>
       </ListItemSecondaryAction>
