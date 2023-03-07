@@ -14,7 +14,13 @@ export default function TodoForm({ addTodo }) {
           reset();
         }}
       >
-        <TextField value={value} onChange={handleChange} />
+        <TextField
+          value={value}
+          onChange={handleChange}
+          margin='normal'
+          label='Add new todo'
+          fullWidth
+        />
       </form>
     </Paper>
   );

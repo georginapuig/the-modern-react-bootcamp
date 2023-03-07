@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import NewTodoForm from './NewTodoForm';
-import Todo from './Todo';
+import TodoApp from './TodoApp';
 import './TodoList.css';
 
 export default class ToDoList extends Component {
@@ -48,15 +48,17 @@ export default class ToDoList extends Component {
 
   render() {
     const list = this.state.todos.map((todo) => {
-      return <Todo 
-        key={todo.id} 
-        id={todo.id} 
-        task={todo.item} 
-        removeItem={() => this.remove(todo.id)} 
-        updateItem={this.update} 
-        completed={todo.completed}
-        toggle={this.toggle}
-      />
+      return (
+        <Todo
+          key={todo.id}
+          id={todo.id}
+          task={todo.item}
+          removeItem={() => this.remove(todo.id)}
+          updateItem={this.update}
+          completed={todo.completed}
+          toggle={this.toggle}
+        />
+      );
     });
 
     return (
