@@ -6,6 +6,7 @@ import Typography from '@mui/material/Typography';
 import TodoList from './TodoList';
 import TodoForm from './TodoForm';
 import { Grid } from '@mui/material';
+import { v4 as uuidv4 } from 'uuid';
 
 export default function Todo() {
   const initialTodos = [
@@ -15,7 +16,7 @@ export default function Todo() {
   ];
   const [todos, setTodos] = useState(initialTodos);
   const addTodo = (newTodoText) => {
-    setTodos([...todos, { id: 4, task: newTodoText, completed: false }]);
+    setTodos([...todos, { id: uuidv4(), task: newTodoText, completed: false }]);
   };
   const removeTodo = (todoId) => {
     // filter out removed todo
@@ -24,6 +25,18 @@ export default function Todo() {
     setTodos(updatedTodos);
     console.log('remove');
   };
+  const toggleTodo = (todoId) => {
+    const updatedTodos = todos.map((todo) =>
+      todo.id === todoId ? { ...todo, completed: !todo.completed } : todo
+    );
+    setTodos(updatedTodos);
+    console.log('update');
+  };
+  // const updateTodo = (todoId, updateTask) => {
+  //   const updateTodos = todos.map((todo) => {
+  //     if (todo.id == todoId) return { ...todo, task: updateTask };
+  //   });
+  // };
 
   return (
     <Paper
@@ -47,7 +60,7 @@ export default function Todo() {
       >
         <Grid item xs={11} md={8} lg={4}>
           <TodoForm addTodo={addTodo} />
-          <TodoList todos={todos} remove={removeTodo} />
+          <TodoList todos={todos} remove={removeTodo} toggle={toggleTodo} />
         </Grid>
       </Grid>
     </Paper>

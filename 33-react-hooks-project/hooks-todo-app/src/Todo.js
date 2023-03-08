@@ -9,10 +9,15 @@ import {
   ListItemSecondaryAction,
 } from '@mui/material';
 
-export default function Todo({ task, completed, remove, id }) {
+export default function Todo({ id, task, completed, remove, toggle }) {
   return (
     <ListItem>
-      <Checkbox disableRipple tabIndex={-1} checked={completed} />
+      <Checkbox
+        disableRipple
+        tabIndex={-1}
+        checked={completed}
+        onClick={() => toggle(id)}
+      />
       <ListItemText
         style={{ textDecoration: completed ? 'line-through' : 'none' }}
       >
