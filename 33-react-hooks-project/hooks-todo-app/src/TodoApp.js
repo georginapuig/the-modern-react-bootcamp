@@ -14,10 +14,13 @@ export default function Todo() {
     { id: 2, task: 'wash car', completed: false },
     { id: 3, task: 'grow beard', completed: true },
   ];
+
   const [todos, setTodos] = useState(initialTodos);
+
   const addTodo = (newTodoText) => {
     setTodos([...todos, { id: uuidv4(), task: newTodoText, completed: false }]);
   };
+
   const removeTodo = (todoId) => {
     // filter out removed todo
     const updatedTodos = todos.filter((todo) => todo.id !== todoId);
@@ -25,6 +28,7 @@ export default function Todo() {
     setTodos(updatedTodos);
     console.log('remove');
   };
+
   const toggleTodo = (todoId) => {
     const updatedTodos = todos.map((todo) =>
       todo.id === todoId ? { ...todo, completed: !todo.completed } : todo
@@ -32,11 +36,14 @@ export default function Todo() {
     setTodos(updatedTodos);
     console.log('update');
   };
-  // const updateTodo = (todoId, updateTask) => {
-  //   const updateTodos = todos.map((todo) => {
-  //     if (todo.id == todoId) return { ...todo, task: updateTask };
-  //   });
-  // };
+
+  const editTodo = (todoId, updatedTask) => {
+    const updatedTodos = todos.map((todo) =>
+      todo.id === todoId ? { ...todo, task: updatedTask } : todo
+    );
+    setTodos(updatedTodos);
+    console.log('edit');
+  };
 
   return (
     <Paper
@@ -60,7 +67,12 @@ export default function Todo() {
       >
         <Grid item xs={11} md={8} lg={4}>
           <TodoForm addTodo={addTodo} />
-          <TodoList todos={todos} remove={removeTodo} toggle={toggleTodo} />
+          <TodoList
+            todos={todos}
+            remove={removeTodo}
+            toggle={toggleTodo}
+            edit={editTodo}
+          />
         </Grid>
       </Grid>
     </Paper>
