@@ -1,4 +1,5 @@
-import { React, useState } from 'react';
+import { React, useEffect } from 'react';
+import useTodoState from './hooks/useTodoState';
 import Paper from '@mui/material/Paper';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
@@ -6,44 +7,19 @@ import Typography from '@mui/material/Typography';
 import TodoList from './TodoList';
 import TodoForm from './TodoForm';
 import { Grid } from '@mui/material';
-import { v4 as uuidv4 } from 'uuid';
 
 export default function Todo() {
-  const initialTodos = [
-    { id: 1, task: 'clean fishtank', completed: false },
-    { id: 2, task: 'wash car', completed: false },
-    { id: 3, task: 'grow beard', completed: true },
-  ];
+  const initialTodos = JSON.parse(window.localStorage.getItem('todos') || '[]');
+  const { todos, addTodo, removeTodo, toggleTodo, editTodo } =
+    useTodoState(initialTodos);
+  //   { id: 1, task: 'clean fishtank', completed: false },
+  //   { id: 2, task: 'wash car', completed: false },
+  //   { id: 3, task: 'grow beard', completed: true },
+  // ];
 
-  const [todos, setTodos] = useState(initialTodos);
-
-  const addTodo = (newTodoText) => {
-    setTodos([...todos, { id: uuidv4(), task: newTodoText, completed: false }]);
-  };
-
-  const removeTodo = (todoId) => {
-    // filter out removed todo
-    const updatedTodos = todos.filter((todo) => todo.id !== todoId);
-    // call setTodos with new todos array
-    setTodos(updatedTodos);
-    console.log('remove');
-  };
-
-  const toggleTodo = (todoId) => {
-    const updatedTodos = todos.map((todo) =>
-      todo.id === todoId ? { ...todo, completed: !todo.completed } : todo
-    );
-    setTodos(updatedTodos);
-    console.log('update');
-  };
-
-  const editTodo = (todoId, updatedTask) => {
-    const updatedTodos = todos.map((todo) =>
-      todo.id === todoId ? { ...todo, task: updatedTask } : todo
-    );
-    setTodos(updatedTodos);
-    console.log('edit');
-  };
+  useEffect(() => {
+    window.localStorage.setItem('todos', JSON.stringify(todos));
+  }, [todos]);
 
   return (
     <Paper
