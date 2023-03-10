@@ -9,17 +9,9 @@ import TodoForm from './TodoForm';
 import { Grid } from '@mui/material';
 
 export default function Todo() {
-  const initialTodos = JSON.parse(window.localStorage.getItem('todos') || '[]');
+  const initialTodos = [{ id: 1, task: 'clean fishtank', completed: false }];
   const { todos, addTodo, removeTodo, toggleTodo, editTodo } =
     useTodoState(initialTodos);
-  //   { id: 1, task: 'clean fishtank', completed: false },
-  //   { id: 2, task: 'wash car', completed: false },
-  //   { id: 3, task: 'grow beard', completed: true },
-  // ];
-
-  useEffect(() => {
-    window.localStorage.setItem('todos', JSON.stringify(todos));
-  }, [todos]);
 
   return (
     <Paper
