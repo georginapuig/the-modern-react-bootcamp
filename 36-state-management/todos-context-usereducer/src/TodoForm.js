@@ -5,7 +5,7 @@ import Paper from '@material-ui/core/Paper';
 import useInputState from './hooks/useInputState';
 
 function TodoForm() {
-  const { addTodo } = useContext(TodosContext);
+  const { dispatch } = useContext(TodosContext);
   const [value, handleChange, reset] = useInputState('');
 
   return (
@@ -13,7 +13,7 @@ function TodoForm() {
       <form
         onSubmit={(e) => {
           e.preventDefault();
-          addTodo(value);
+          dispatch({ type: 'ADD', task: value });
           reset();
         }}
       >
