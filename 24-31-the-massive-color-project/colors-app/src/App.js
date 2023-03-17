@@ -1,19 +1,25 @@
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
-import { generatePalette } from './ColorsHelpers';
-import seedColors from './seedColors';
-import PaletteList from './PaletteList';
+import { generatePalette } from './colorHelpers';
 import Palette from './Palette';
-import './App.css';
+import PaletteList from './PaletteList';
+import SingleColorPalette from './SingleColorPalette';
+import seedColors from './seedColors';
 
 class App extends Component {
   findPalette(id) {
-    return seedColors.find((palette) => palette.id === id);
+    return seedColors.find(function (palette) {
+      return palette.id === id;
+    });
   }
-
   render() {
     return (
       <Switch>
+        <Route
+          exact
+          path='/palette/:paletteId/:colorId'
+          render={() => <SingleColorPalette />}
+        />
         <Route
           exact
           path='/'
@@ -32,16 +38,7 @@ class App extends Component {
             />
           )}
         />
-        <Route
-          exact
-          path='/palette/:paletteId/:colorId'
-          render={() => <h1>SINGLE COLOR PAGE!</h1>}
-        />
       </Switch>
-
-      // <div>
-      //   <Palette palette={generatePalette(seedColors[4])} />
-      // </div>
     );
   }
 }
