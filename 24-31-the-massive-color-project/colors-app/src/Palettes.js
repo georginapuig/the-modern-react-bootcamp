@@ -1,16 +1,23 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import Palette from './Palette';
-import { generatePalette } from './ColorsHelpers';
-import seedColors from './seedColors';
+import MiniPalette from './MiniPalette';
 
 export default class Palettes extends Component {
   render() {
     const { palettes } = this.props;
     const palette = palettes.map((palette) => {
-      return <Link to={`/palette/${palette.id}`}>{palette.paletteName}</Link>;
+      return (
+        <Link to={`/palette/${palette.id}`}>
+          <MiniPalette {...palette} />
+        </Link>
+      );
     });
 
-    return <div>{palette}</div>;
+    return (
+      <div>
+        <h1>react colors</h1>
+        {palette}
+      </div>
+    );
   }
 }
