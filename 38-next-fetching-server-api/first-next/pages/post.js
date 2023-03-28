@@ -7,3 +7,13 @@ Post.getInitialProps = async ({ query }) => {
 };
 
 export default Post;
+
+/************
+ with router
+*************/
+
+// import { withRouter } from 'next/router';
+
+// const Post = (props) => <h1>post number {props.router.query.id}</h1>;
+
+// export default withRouter(Post);
