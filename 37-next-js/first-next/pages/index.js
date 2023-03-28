@@ -1,11 +1,10 @@
 import Link from 'next/link';
+import Navbar from '../components/Navbar';
 
 const Index = () => (
   <div>
-    <h1>next page</h1>
-    <Link href='/contact' legacyBehavior>
-      <a>Contact page</a>
-    </Link>
+    <Navbar />
+    <h1>next home page</h1>
   </div>
 );
 

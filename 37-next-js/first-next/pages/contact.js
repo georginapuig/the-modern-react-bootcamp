@@ -1,10 +1,13 @@
-const Contact = () => {
-  console.log('running index');
+import Navbar from '../components/Navbar';
 
+const Contact = () => {
   return (
-    <div>
-      <h1>contact us</h1>
-    </div>
+    <>
+      <Navbar />
+      <div>
+        <h1>contact us</h1>
+      </div>
+    </>
   );
 };
 
