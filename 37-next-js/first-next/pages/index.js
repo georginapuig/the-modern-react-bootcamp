@@ -3,7 +3,6 @@ import Navbar from '../components/Navbar';
 
 const Index = () => (
   <div>
-    <Navbar />
     <h1>next home page</h1>
   </div>
 );

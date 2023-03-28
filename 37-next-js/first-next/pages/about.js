@@ -2,12 +2,9 @@ import Navbar from '../components/Navbar';
 
 const About = () => {
   return (
-    <>
-      <Navbar />
-      <div>
-        <h1>about us</h1>
-      </div>
-    </>
+    <div>
+      <h1>about us</h1>
+    </div>
   );
 };
 
